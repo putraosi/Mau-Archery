@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css";
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
 
   return (
@@ -14,10 +14,18 @@ const Modal = ({ isOpen, onClose }) => {
           type={"text"}
           value={name}
           placeholder="Masukan nama..."
+          autoFocus
           onChange={(e) => setName(e.target.value)}
         />
 
-        <button onClick={() => alert("coming soon")}>Submit</button>
+        <button
+          onClick={() => {
+            onSubmit(name);
+            setName("");
+          }}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

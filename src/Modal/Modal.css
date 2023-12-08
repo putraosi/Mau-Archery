@@ -47,9 +47,13 @@
     border-radius: 8px;
     background-color: white;
     color: black;
-    padding: 16px 24px;
+    padding: 8px 24px;
     align-self: center;
     font-weight: 700;
     border: 1px solid black;
+}
 
+.modal-content > button:hover{
+    background-color: black;
+    color: white;
 }

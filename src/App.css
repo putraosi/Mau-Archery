@@ -37,6 +37,7 @@
   color: black;
 }
 
+
 .container_item > div {
   width: 300px;
   height: 300px;
@@ -47,10 +48,18 @@
   display: flex;
   cursor: pointer;
   border: 1px solid black;
+  flex-direction: column;
 }
 
 .container_item > div > p {
   font-size: 150px;
+  font-weight: 700;
+  color: black;
+  line-height: normal;
+}
+
+.container_item > div > p.name {
+  font-size: 30px;
   font-weight: 700;
   color: black;
 }

@@ -1,11 +1,29 @@
+import { clone } from "lodash";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Modal from "./Modal";
 
-const dataDummy = [1, 2, 3];
+
+const defaultPost = {
+  queue: 0,
+  name: "",
+};
 
 function App() {
+  const [isView, setIsView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [dataPos, setDataPos] = useState([]);
+  const [dataQueue, setDataQueue] = useState([]);
+  const [currentPosition, setCurrentPosition] = useState(0);
+
+  useEffect(() => {
+    const newData = [];
+    for (let i = 0; i < 3; i++) {
+      newData.push(defaultPost);
+    }
+
+    setDataPos(newData);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -21,16 +39,47 @@ function App() {
     }
   };
 
+  const onSetPos = (postion) => {
+    const cloneDataPos = clone(dataPos);
+
+    if (dataQueue && dataQueue.length && dataQueue[0].queue) {
+      cloneDataPos[postion] = dataQueue[0];
+
+      setDataPos(cloneDataPos);
+      setDataQueue((prev) => prev.slice(1));
+    }
+    setIsView((prev) => !prev);
+  };
+
+  const onAddPos = (name) => {
+    let postion = currentPosition;
+    const cloneData = clone(dataQueue);
+
+    postion++;
+    cloneData.push({
+      queue: postion,
+      name,
+    });
+
+    setDataQueue(cloneData);
+    setCurrentPosition(postion);
+  };
+
   return (
     <div className="container">
       <h1>Daftar Antrian</h1>
 
       <div className="counter">
-        {dataDummy.map((item, index) => (
-          <div key={index} className="container_item" onClick={()=> alert('Coming Soon')}>
+        {dataPos.map((item, index) => (
+          <div
+            key={index}
+            className="container_item"
+            onClick={() => onSetPos(index)}
+          >
             <p>{`Pos ${index + 1}`}</p>
             <div>
-              <p>{"1"}</p>
+              <p>{item?.queue || 0}</p>
+              <p className={"name"}>{item?.name || " "}</p>
             </div>
           </div>
         ))}
@@ -39,16 +88,29 @@ function App() {
       <div className="footer">
         <div className="wrapper">
           <p className="title">Antrian Berikutnya</p>
-          <p className="number">4</p>
+          <p className="number">
+            {(dataQueue && dataQueue.length && dataQueue[0]?.queue) || "Kosong"}
+          </p>
         </div>
 
         <div className="wrapper">
           <p className="title">Total Antrian</p>
-          <p className="number">20</p>
+          <p className="number">
+            {(dataQueue && dataQueue.length) || "Kosong"}
+          </p>
         </div>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={(name) => {
+          setIsModalOpen(false);
+          onAddPos(name);
+        }}
+      />
+
+      {isView && <div style={{ display: "none" }} />}
     </div>
   );
 }
