@@ -10,7 +10,7 @@
   padding: 50px;
 }
 
-.container a.add{
+.container a.add {
   display: none;
 }
 
@@ -96,14 +96,14 @@
   font-weight: 600;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
   .container {
     padding: 16px;
     gap: 16px;
     margin-bottom: 16px;
   }
 
-  .container a.add{
+  .container a.add {
     display: flex;
     position: absolute;
     top: 16px;
@@ -123,13 +123,16 @@
 
   .container .counter {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .container_item{
+    flex: 25%
   }
 
   .container_item > div {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
 
   .container_item > div > p {
@@ -156,8 +159,8 @@
   }
 
   .container_item:hover > div,
-.container_item:hover > div > p {
-  color: black;
-  background-color: white;
-}
+  .container_item:hover > div > p {
+    color: black;
+    background-color: white;
+  }
 }
