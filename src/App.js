@@ -1,8 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { clone } from "lodash";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Modal from "./Modal";
-
 
 const defaultPost = {
   queue: 0,
@@ -111,6 +111,10 @@ function App() {
       />
 
       {isView && <div style={{ display: "none" }} />}
+
+      <a className="add" onClick={() => setIsModalOpen(true)}>
+        {"Tambah"}
+      </a>
     </div>
   );
 }

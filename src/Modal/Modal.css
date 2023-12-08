@@ -41,6 +41,7 @@
   border-radius: 8px;
   padding: 8px 16px;
   margin-bottom: 20px;
+  font-size: 14px;
 }
 
 .modal-content > button{
@@ -50,10 +51,26 @@
     padding: 8px 24px;
     align-self: center;
     font-weight: 700;
+    font-size: 14px;
     border: 1px solid black;
 }
 
 .modal-content > button:hover{
     background-color: black;
     color: white;
+}
+
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 300px;
+  }
+
+  .modal-content > p {
+    font-size: 18px;
+  }
+
+  .modal-content > span {
+    font-size: 12px;
+  }
 }
